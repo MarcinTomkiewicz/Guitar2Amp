@@ -1,7 +1,7 @@
 import { Logo } from "../logo/Logo"
 import { AddressInfo } from "./AddressInfo"
 import { IconTray } from "./IconTray"
-import { TopMenu } from "./TopMenu"
+import { TopMenu } from "./topMenu/TopMenu"
 
 
 export const TopPanel = () => {

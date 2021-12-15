@@ -57,3 +57,14 @@ code {
   background: #057EB1;
   height: 70px;
 }
+
+.top__menu--elements {
+  width: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.display__none {
+  display: none;
+}
