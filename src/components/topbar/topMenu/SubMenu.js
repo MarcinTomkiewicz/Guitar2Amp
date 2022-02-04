@@ -1,11 +1,9 @@
 export const SubMenu = ({ menuItems }) => {
   return (
-    <div className="top__menu--submenu">
-      <ul style={{ listStyle: "none" }}>
+      <ul className="top__menu--list">
         {menuItems.map((el) => {
           return <li key={el}>{el}</li>;
         })}
       </ul>
-    </div>
   );
 };

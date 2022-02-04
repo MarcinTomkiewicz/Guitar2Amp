@@ -22,10 +22,10 @@ export const MenuElement = ({ menuType, isClicked, isMenuVisible }) => {
 
   return (
     <>
-      <div id={menuType} onClick={isClicked}>
+      <div id={menuType} onClick={isClicked} className="top__menu--element">
         {menuName}
       </div>
-      <div className={isMenuVisible !== menuType ? "display__none" : ""}>
+      <div className={isMenuVisible !== menuType ? "display__none" : "top__menu--submenu"}>
         <SubMenu menuItems={menuItems} />
       </div>
     </>
