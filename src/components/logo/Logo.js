@@ -2,6 +2,6 @@
 
 export const Logo = () => {
     return (
-        <img src={process.env.PUBLIC_URL + '/guitar2.jpg'} alt="guitar banner"></img>
+        <img src={process.env.PUBLIC_URL + '/Logo Vector-14.png'} className="top__logo" alt="guitar banner"></img>
     )
 }
