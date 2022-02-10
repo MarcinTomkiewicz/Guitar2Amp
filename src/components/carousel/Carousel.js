@@ -2,7 +2,7 @@ import React from "react";
 import Carousel from "react-material-ui-carousel";
 import { Paper, Button } from "@mui/material";
 
-export function CarouselComponent(props) {
+export function CarouselComponent() {
   const items = [
     {
       name: "Random Name #1",
@@ -18,7 +18,7 @@ export function CarouselComponent(props) {
 
   return (
     <Carousel
-      className="carousel"
+      className="top__carousel"
       stopAutoPlayOnHover
       swipe
       animation="slide"
@@ -34,11 +34,11 @@ function Item(props) {
   return (
       
     <Paper>
-        <img src={props.item.img} alt="" className="carousel__img"></img>
+      <img src={props.item.img} alt="" className="carousel__img"></img>
       <div className="carousel__writing">
-      <h2>{props.item.name}</h2>
-      <p>{props.item.description}</p>
-      <Button className="carousel__button">Check it out!</Button>
+      <h2 className="carousel__element">{props.item.name}</h2>
+      <p className="carousel__element">{props.item.description}</p>
+      <Button variant="contained" style={{width: "fit-content"}}>Check it out!</Button>
       </div>
 
     </Paper>

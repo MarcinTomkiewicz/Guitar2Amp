@@ -2,13 +2,11 @@ import { CarouselComponent } from "../carousel/Carousel";
 
 export const LandingPage = () => {
   return (
-    <>
-    <CarouselComponent></CarouselComponent>
     <div
     className="main__content"
       
     >
-      <p className="subhead">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+      <p className="subhead" id="Lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
       eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
       voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
       clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
@@ -790,6 +788,5 @@ export const LandingPage = () => {
       ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
       euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
     </div>
-    </>
   );
 };

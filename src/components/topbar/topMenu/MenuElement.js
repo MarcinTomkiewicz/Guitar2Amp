@@ -7,15 +7,15 @@ export const MenuElement = ({ menuType, isClicked, isMenuVisible }) => {
 
   useEffect(() => {
     if (menuType === "guitar") {
-      setMenuItems(["Klasyczne", "Akustyczne", "Elektryczne"]);
+      setMenuItems([{pl: "Klasyczne", eng: "acoustic"}, {pl: "Akustyczne", eng: "hollow"}, {pl: "Elektryczne", eng: "solid"}]);
       setMenuName("Gitary");
     }
     if (menuType === "bass") {
-      setMenuItems(["Klasyczne", "Akustyczne", "Elektryczne"]);
+      setMenuItems([{pl: "Klasyczne", eng: "acoustic"}, {pl: "Akustyczne", eng: "hollow"}, {pl: "Elektryczne", eng: "solid"}]);
       setMenuName("Basy");
     }
     if (menuType === "amplifiers") {
-      setMenuItems(["Mocne", "Silne", "Słabe"]);
+      setMenuItems([{pl: "Silne", eng: "strong"}, {pl: "Średnie", eng: "medium"}, {pl: "Słabe", eng: "weak"}]);
       setMenuName("Amplitunery");
     }
   }, [menuType]);
@@ -26,7 +26,7 @@ export const MenuElement = ({ menuType, isClicked, isMenuVisible }) => {
         {menuName}
       </div>
       <div className={isMenuVisible !== menuType ? "display__none" : "top__menu--submenu"}>
-        <SubMenu menuItems={menuItems} />
+        <SubMenu menuItems={menuItems} menuName={menuType}/>
       </div>
     </>
   );
