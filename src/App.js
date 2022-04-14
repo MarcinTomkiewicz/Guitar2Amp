@@ -3,11 +3,13 @@ import { LandingPage } from "./components/content/LandingPage";
 import { CarouselComponent } from './components/carousel/Carousel';
 import { Route, Routes, useLocation } from 'react-router';
 import { DisplayGuitar } from './components/guitars/displayguitars/DisplayGuitar';
-import { guitars } from './objects/guitars'
+// import { guitars } from './objects/guitars'
 import { ShowGuitar } from "./components/guitars/displayguitars/showguitar/ShowGuitar";
+import { useGetGuitars } from "./hooks/useGetGuitars";
 
 function App() {
   let location = useLocation();
+  const guitars = useGetGuitars();
   return (
     <div className="wrapper">
   <TopPanel />
@@ -16,8 +18,7 @@ function App() {
     <Route path="/" element={<LandingPage />} />
     {guitars.map(el => {
       let goToPath = `guitar/${el.type}/${el.short}`;
-      console.log(19, goToPath);
-      return <Route path={goToPath} element={<ShowGuitar guitar={el.short} />} />
+      return <Route path={goToPath} key={el.short} element={<ShowGuitar guitar={el.short} />} />
     })}
     <Route path="guitar/acoustic" element={<DisplayGuitar chosenType="acoustic" />} />
     <Route path="guitar/hollow" element={<DisplayGuitar chosenType="hollow" />} />

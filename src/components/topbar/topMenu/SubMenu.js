@@ -7,10 +7,10 @@ export const SubMenu = ({ menuItems, menuName }) => {
         {menuItems.map((el) => {
           if (el.eng !== undefined) {
             const linkValue = `${menuName}/${el.eng}`;
-          return <RouterLink to={linkValue} id={el.pl} className="top__menu--element"><li id={el.pl} key={el.eng}>{el.pl}</li></RouterLink>;
+          return <RouterLink to={linkValue} id={el.pl} key={el.pl} className="top__menu--element"><li id={el.pl} key={el.eng}>{el.pl}</li></RouterLink>;
           }
           else {
-            return;
+            return null;
           }
         })}
       </ul>

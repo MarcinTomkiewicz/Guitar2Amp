@@ -1,6 +1,6 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css"; 
 import { Carousel as NewCarousel } from 'react-responsive-carousel'; 
-import ReactImageMagnify from 'react-image-magnify';
+// import ReactImageMagnify from 'react-image-magnify';
 
 export const CarouselImages = ({ images }) => {
   const items = [];
@@ -17,7 +17,7 @@ export const CarouselImages = ({ images }) => {
     thumbWidth={120}
     transitionTime={1000}
     width={"100%"}
-    centerMode
+    // centerMode
     >
         {items.map((item, i) => {
             return (
