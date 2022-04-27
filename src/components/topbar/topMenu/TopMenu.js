@@ -14,7 +14,6 @@ export const TopMenu = () => {
   };
 
   const handleClickOutside = e => {
-    console.log(e.target.id, "///" , isMenuVisible);
     if (e.target.id === "Klasyczne" || e.target.id === "Elektryczne" || e.target.id === "Akustyczne"  || e.target.id === "Wszystkie" || e.target.id === "Silne" || e.target.id === "Średnie" || e.target.id === "Słabe") {
       return;
     }

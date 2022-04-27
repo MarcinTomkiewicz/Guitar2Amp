@@ -6,8 +6,6 @@ export const ShowGuitar = ({ guitar }) => {
 
   const guitars = useGetGuitars()
 
-  console.log(guitars, guitar);
-
   return guitars.map((el) => {
     if (el?.short === guitar) {
       return (

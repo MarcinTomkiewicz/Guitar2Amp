@@ -3,9 +3,9 @@ import { LandingPage } from "./components/content/LandingPage";
 import { CarouselComponent } from './components/carousel/Carousel';
 import { Route, Routes, useLocation } from 'react-router';
 import { DisplayGuitar } from './components/guitars/displayguitars/DisplayGuitar';
-// import { guitars } from './objects/guitars'
 import { ShowGuitar } from "./components/guitars/displayguitars/showguitar/ShowGuitar";
 import { useGetGuitars } from "./hooks/useGetGuitars";
+import { AdminPanel } from "./components/admin/AdminPanel";
 
 function App() {
   let location = useLocation();
@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="wrapper">
   <TopPanel />
-  <CarouselComponent />
+  {location.pathname === "/admin" ? '' : <CarouselComponent />}
   <Routes>
     <Route path="/" element={<LandingPage />} />
     {guitars.map(el => {
@@ -32,6 +32,7 @@ function App() {
     <Route path="amplifiers/medium" element={<LandingPage />} />
     <Route path="amplifiers/weak" element={<LandingPage />} />
     <Route path="amplifiers" element={<LandingPage />} />
+    <Route path="admin" element={<AdminPanel />} />
   </Routes>
   </div>
   );
