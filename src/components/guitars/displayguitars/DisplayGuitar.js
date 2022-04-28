@@ -9,6 +9,7 @@ export const DisplayGuitar = ({ chosenType }) => {
   let location = useLocation();
 
   const guitars = useGetGuitars();
+  // const guitars = guitaras
 
   return (
     <div className="guitar__display">

@@ -33,7 +33,6 @@ export const AdminInput = ({ label, guitar, toSave, setToSave }) => {
     } else {
       setToSave({ ...toSave, [e.target.id]: e.target.value });
     }
-    console.log(toSave);
     setDefaultValue(e.target.value);
   };
 

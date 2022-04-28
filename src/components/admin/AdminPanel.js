@@ -11,8 +11,8 @@ export const AdminPanel = () => {
   const [selectedGuitar, setSelectedGuitar] = useState("select");
   const [defaultParagraphs, setDefaultParagraphs] = useState("");
   const [defaultCondition, setDefaultCondition] = useState("");
+  const [defaultDescription, setDefaultDescription] = useState(['']);
   const [success, setSuccess] = useState(false);
-  // const [selectedValue, setSelectedValue] = useState("")
   const [toSave, setToSave] = useState({
     name: "",
     short: "",
@@ -25,7 +25,7 @@ export const AdminPanel = () => {
     type: "",
     isActive: true,
     sold: false,
-  })
+  });
   const arrayOfKeys = [
     "name",
     "short",
@@ -39,6 +39,7 @@ export const AdminPanel = () => {
     "isActive",
     "sold",
   ];
+  let descriptionPart;
 
   // F U N C T I O N S
 
@@ -46,73 +47,93 @@ export const AdminPanel = () => {
     e.preventDefault();
     setSearchedValue(e.target.value);
   };
-  
-//   const handleChangeValue = (e) => {
-//     e.preventDefault();
-//     setSelectedValue(e.target.value)
-//   console.log(e.target.value, selectedValue);
-// }
 
   const handleSelectedGuitar = (e) => {
     e.preventDefault();
     guitars.map((guitar) => {
       if (guitar.name !== undefined && guitar.name === e.target.value) {
         setSelectedGuitar(guitar);
-        // setSelectedValue(guitar.name)
-          setDefaultParagraphs(guitar.descr?.length);
+        setDefaultParagraphs(guitar.descr?.length);
         setDefaultCondition(guitar.condition);
-        setToSave(guitar)
-        // console.log(selectedValue);
+        setToSave(guitar);
       }
       if (e.target.value === "add") {
         setSelectedGuitar("add");
-        // setSelectedValue("add")
-          setDefaultParagraphs("1");
+        setDefaultParagraphs("1");
         setDefaultCondition("Select");
-        // console.log(selectedValue);
+        setToSave({
+          name: "",
+          short: "",
+          price: "",
+          descr: [],
+          condition: "",
+          case: "",
+          weight: "",
+          serial: "",
+          type: "",
+          isActive: true,
+          sold: false,
+        })
       }
       if (e.target.value === "select") {
-        setSelectedGuitar("select")
-        // setSelectedValue("select")
-        // console.log(selectedValue);
-        };
+        setSelectedGuitar("select");
+      }
     });
   };
-
-  // const handleInputChange = (e) => {
-  //   e.preventDefault();
-  //   if (selectedGuitar !== "add") {
-  //     toSave = { ...selectedGuitar, [e.target.id]: e.target.value };
-  //   } else {
-  //     toSave = { ...toSave, [e.target.id]: e.target.value };
-  //   }
-  //   console.log(toSave);
-  // };
 
   const handleDropdownChange = (e) => {
     e.preventDefault();
     if (selectedGuitar === "add") {
       setToSave({ ...toSave, [e.target.id]: e.target.value });
       setDefaultParagraphs(e.target.value);
+      console.log(defaultDescription.length, defaultParagraphs);
+      if (defaultDescription.length > defaultParagraphs) {
+       setDefaultDescription(defaultDescription.splice(0,(defaultDescription.length-defaultParagraphs)))
+       console.log(defaultDescription);
+      } 
     } else {
       setToSave({ ...selectedGuitar, [e.target.id]: e.target.value });
       setDefaultParagraphs(e.target.value);
+      console.log(defaultDescription.length, defaultParagraphs);
+      if (defaultDescription.length > defaultParagraphs) {
+        setDefaultDescription(defaultDescription.splice(0,(defaultDescription.length-defaultParagraphs)))
+        console.log(defaultDescription);
+       } 
     }
   };
 
+  useEffect(() => {
+    if (selectedGuitar === "add") {
+      setDefaultDescription([]);
+    }
+    if (selectedGuitar !== "add" && selectedGuitar !== "select") {
+      setDefaultDescription(selectedGuitar.descr);
+    }
+  }, [selectedGuitar, defaultParagraphs])
+
   const handleDescriptionChange = (e) => {
     e.preventDefault();
-    toSave.descr = new Array(parseInt(defaultParagraphs))
-    console.log(toSave.descr);
-    toSave.descr.map((el, i) => {
-      
-      if (i === e.target.id) {
-        console.log(el);
-        el = e.target.value
+    if (selectedGuitar === "add") {
+      descriptionPart = e.target.value;
+      for (let i = 0; i<4; i++) {
+        if(parseInt(e.target.id) === i) {
+          defaultDescription[i] = descriptionPart
+        }
       }
-    })
-    console.log(toSave.descr[0]);
-  }
+      setToSave({...toSave, descr: defaultDescription})
+      console.log(toSave, defaultDescription);
+    } else {
+      descriptionPart = e.target.value;
+      for (let i = 0; i<4; i++) {
+        if(parseInt(e.target.id) === i) {
+          defaultDescription[i] = descriptionPart
+          console.log(toSave, defaultDescription);
+        }
+      }
+      setToSave({ ...selectedGuitar, descr: defaultDescription });      
+    }
+  };
+
 
   const handleConditionChange = (e) => {
     e.preventDefault();
@@ -133,7 +154,7 @@ export const AdminPanel = () => {
 
   const handleReset = (e) => {
     e.preventDefault();
-    setSelectedGuitar("select")
+    setSelectedGuitar("select");
     setToSave({
       name: "",
       short: "",
@@ -146,8 +167,10 @@ export const AdminPanel = () => {
       type: "",
       isActive: true,
       sold: false,
-    })
-  }
+    });
+  };
+
+
 
   return (
     <div className="container mt-3">
@@ -161,16 +184,14 @@ export const AdminPanel = () => {
         <select
           className="form-select"
           size="3"
-          multiple
+          // multiple
           aria-label="size 3 select guitars"
           data-live-search="true"
           defaultValue={selectedGuitar}
           // onClick={handleChangeValue}
           onChange={handleSelectedGuitar}
         >
-          <option value="select">
-            Wybierz gitarę do edycji
-          </option>
+          <option value="select">Wybierz gitarę do edycji</option>
           <option value="add">Dodaj gitarę</option>
           {guitars.map((el, i) => {
             if (el.name !== undefined) {
@@ -222,31 +243,26 @@ export const AdminPanel = () => {
           </div>
           <div className="container w-100 align-items-center">
             <div className="row g-3 mt-2">
-              {defaultParagraphs <= 4
-                ? Array(parseInt(defaultParagraphs))
-                    .fill("")
-                    .map((el, i) => {
-                      return (
-                        <div className="col-md" key={i}>
-                          <div className="form-floating">
-                            <textarea
-                              className="form-control"
-                              id={i}
-                              placeholder=""
-                              style={{ height: "100px" }}
-                              defaultValue={
-                                selectedGuitar !== "add"
-                                  ? selectedGuitar.descr[i]
-                                  : ""
-                              }
-                              onChange={handleDescriptionChange}
-                            ></textarea>
-                            <label for="floatingInputGrid">Opis {i + 1}</label>
-                          </div>
-                        </div>
-                      );
-                    })
-                : ""}
+              {Array(parseInt(defaultParagraphs))
+                .fill("")
+                .map((el, i) => {
+                  // console.log(defaultDescription);
+                  return (
+                    <div className="col-md" key={i}>
+                      <div className="form-floating">
+                        <textarea
+                          className="form-control"
+                          id={i}
+                          placeholder=""
+                          style={{ height: "100px" }}
+                          value={defaultDescription[i]}
+                          onChange={handleDescriptionChange}
+                        ></textarea>
+                        <label for="floatingInputGrid">Opis {i + 1}</label>
+                      </div>
+                    </div>
+                  );
+                })}
             </div>
           </div>
           <div className="container w-100 align-items-center">
